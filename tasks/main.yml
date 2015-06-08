@@ -1,0 +1,8 @@
+---
+- include: check-env.yml
+- include: java.yml
+- include: system.yml
+- include: limits.yml
+- include: kafka-install.yml
+- include: kafka-cfg.yml
+

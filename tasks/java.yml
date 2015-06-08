@@ -1,0 +1,16 @@
+---
+- name: "Check if Java is installed"
+  shell: which java
+  register: check_java
+  tags:
+    - kafka-install
+    - java
+
+- name: "Install OpenJDK"
+  apt: name=openjdk-7-jre-headless state=present
+  sudo: yes
+  when: check_java.rc != 0
+  tags:
+    - kafka-install
+    - java
+

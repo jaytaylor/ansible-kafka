@@ -1,0 +1,15 @@
+---
+- name: "Check 'zookeeper_hosts' variable"
+  fail: msg="Playbook execution aborted due to missing or empty required variable 'zookeeper_hosts'"
+  when: zookeeper_hosts is not defined or zookeeper_hosts == ''
+  tags:
+    - kafka-install
+    - kafka-cfg
+
+- name: "Check 'kafka_hosts' variable"
+  fail: msg="Playbook execution aborted due to missing or empty required variable 'kafka_hosts'"
+  when: kafka_hosts is not defined or kafka_hosts == ''
+  tags:
+    - kafka-install
+    - kafka-cfg
+
