@@ -1,6 +1,30 @@
 ---
 - name: "Download kafka binary package archive"
-  get_url: url={{kafka_url}} dest={{kafka_tmp}} timeout=600
+  get_url: url={{ kafka_url }} dest={{ kafka_bin_tmp }} timeout=600
+  tags:
+    - kafka-install
+
+- name: "Download the corresponding cryptographic signature file"
+  get_url: url={{ kafka_sig_url }} dest={{ kafka_sig_tmp }} timeout=600
+  tags:
+    - kafka-install
+
+- name: "Verify kafka binary package archive authenticity"
+  shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
+  ignore_errors: yes
+  register: verify
+  tags:
+    - kafka-install
+
+- name: "Import PGP keys and retry verifying authenticity"
+  shell: gpg --keyserver pgp.mit.edu --recv-key {{ kafka_sig_id }} || gpg --keyserver pgp.surfnet.nl --recv-key {{ kafka_sig_id }}
+  when: verify.rc != 0
+  tags:
+    - kafka-install
+
+- name: "Retry kafka binary package archive autenticity verification"
+  shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
+  when: verify.rc != 0
   tags:
     - kafka-install
 
