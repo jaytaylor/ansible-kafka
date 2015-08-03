@@ -36,6 +36,7 @@
 
 - name: "Link /usr/local/kafka to the right version"
   file: path=/usr/local/kafka state=link src=/usr/local/kafka_{{ kafka_scala_version }}-{{ kafka_version }}
+  sudo: yes
   tags:
     - kafka-install
 
