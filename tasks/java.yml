@@ -1,6 +1,6 @@
 ---
 - name: "Check if Java is installed"
-  shell: which java
+  shell: command -v java
   register: check_java
   failed_when: check_java.rc not in  (0, 1)
   changed_when: False
