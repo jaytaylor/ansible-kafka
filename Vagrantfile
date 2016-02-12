@@ -80,7 +80,7 @@ Vagrant.configure(2) do |config|
     rm -rf /tmp/ansible-kafka
     cp -R /vagrant /tmp/ansible-kafka
     cd /tmp/ansible-kafka/test
-    ANSIBLE_EXTRA_VARS="exhibitor_config_type=none kafka_mirror=http://mirror.olnevhost.net/pub/apache/kafka"
+    ANSIBLE_EXTRA_VARS=""
     ansible-galaxy install -r requirements.yml
     ansible-playbook -i "localhost," playbook.yml --extra-vars="${ANSIBLE_EXTRA_VARS}" --syntax-check
     ansible-playbook -i "localhost," playbook.yml --extra-vars="${ANSIBLE_EXTRA_VARS}" --connection=local --sudo

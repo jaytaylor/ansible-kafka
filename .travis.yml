@@ -1,5 +1,8 @@
 ---
 
+sudo: required
+dist: trusty
+
 language: python
 python: 2.7
 
@@ -19,7 +22,7 @@ install:
 script:
 - cd test
 - ansible-galaxy install -r requirements.yml
-- export ANSIBLE_EXTRA_VARS="exhibitor_config_type=none kafka_version=$KAFKA_VERSION"
+- export ANSIBLE_EXTRA_VARS="kafka_version=$KAFKA_VERSION"
 - ansible-playbook -i "localhost," playbook.yml --extra-vars="${ANSIBLE_EXTRA_VARS}" --syntax-check
 - ansible-playbook -i "localhost," playbook.yml --extra-vars="${ANSIBLE_EXTRA_VARS}" --connection=local --sudo
 - >
@@ -27,3 +30,6 @@ script:
   | grep -q 'changed=0.*failed=0'
   && (echo 'Idempotence test: pass' && exit 0)
   || (echo 'Idempotence test: fail' && exit 1)
+- cat /var/log/zookeeper/zookeeper.log
+- cat /var/log/kafka/kafka.err
+- cat /var/log/kafka/kafka.log

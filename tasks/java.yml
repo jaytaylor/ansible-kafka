@@ -8,6 +8,9 @@
     - kafka-install
     - java
 
+- name: "Was Java installed?"
+  debug: var=check_java
+
 - name: "Install OpenJDK"
   apt: name=openjdk-7-jre-headless state=present
   sudo: yes
