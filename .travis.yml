@@ -8,10 +8,11 @@ python: 2.7
 
 env:
   matrix:
-  - ANSIBLE_VERSION=1.9.4   KAFKA_VERSION=0.8.2.2
-  - ANSIBLE_VERSION=1.9.4   KAFKA_VERSION=0.9.0.0
-  - ANSIBLE_VERSION=2.0.0.2 KAFKA_VERSION=0.8.2.2
-  - ANSIBLE_VERSION=2.0.0.2 KAFKA_VERSION=0.9.0.0
+  - ANSIBLE_VERSION=1.9.4   ANSIBLE_EXTRA_VARS="kafka_version=0.8.2.2"
+  - ANSIBLE_VERSION=1.9.4   ANSIBLE_EXTRA_VARS="kafka_version=0.9.0.0"
+  - ANSIBLE_VERSION=2.0.0.2 ANSIBLE_EXTRA_VARS="kafka_version=0.8.2.2"
+  - ANSIBLE_VERSION=2.0.0.2 ANSIBLE_EXTRA_VARS="kafka_version=0.9.0.0"
+  - ANSIBLE_VERSION=2.0.0.2 ANSIBLE_EXTRA_VARS="kafka_version=0.9.0.0 kafka_generate_broker_id=false"
 
 before_install:
 - sudo apt-get update -qq
@@ -22,7 +23,6 @@ install:
 script:
 - cd test
 - ansible-galaxy install -r requirements.yml
-- export ANSIBLE_EXTRA_VARS="kafka_version=$KAFKA_VERSION"
 - ansible-playbook -i "localhost," playbook.yml --extra-vars="${ANSIBLE_EXTRA_VARS}" --syntax-check
 - ansible-playbook -i "localhost," playbook.yml --extra-vars="${ANSIBLE_EXTRA_VARS}" --connection=local --sudo
 - >
@@ -30,6 +30,3 @@ script:
   | grep -q 'changed=0.*failed=0'
   && (echo 'Idempotence test: pass' && exit 0)
   || (echo 'Idempotence test: fail' && exit 1)
-- cat /var/log/zookeeper/zookeeper.log
-- cat /var/log/kafka/kafka.err
-- cat /var/log/kafka/kafka.log

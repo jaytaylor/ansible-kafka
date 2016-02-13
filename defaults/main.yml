@@ -12,10 +12,10 @@ kafka_scala_version: "2.10"
 
 kafka_mirror: http://apache.mirrors.tds.net/kafka
 kafka_url: "{{ kafka_mirror }}/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
-kafka_bin_tmp: /tmp/kafka.tar.gz
+kafka_bin_tmp: "/tmp/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tar.gz"
 
 kafka_sig_url: "https://dist.apache.org/repos/dist/release/kafka/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz.asc"
-kafka_sig_tmp: /tmp/kafka.tar.gz.asc
+kafka_sig_tmp: "/tmp/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tar.gz.asc"
 kafka_sig_id: E0A61EEA
 # NB: ^ this is the trusted signer's signature id.
 
@@ -34,6 +34,8 @@ kafka_heap_opts: "-Xmx1G -Xms1G"
 nofiles_limit: 50000
 
 kafka_port_test_timeout_seconds: 30
+
+kafka_generate_broker_id: yes
 
 server:
   # broker_id: <-- this is auto-set by hashing the machine-id during kafka-cfg step.
