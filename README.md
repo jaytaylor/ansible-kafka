@@ -1,5 +1,8 @@
 # Ansible Kafka
 
+[![Build Status](https://travis-ci.org/jaytaylor/ansible-kafka.svg?branch=master)](https://travis-ci.org/jaytaylor/ansible-kafka)
+[![Galaxy](https://img.shields.io/badge/galaxy-jaytaylor.kafka-blue.svg)](https://galaxy.ansible.com/list#/roles/4083)
+
 An ansible role to install and configure [kafka](https://kafka.apache.org/) distributed pub/sub messaging queue clusters.
 
 ## How to get it
@@ -50,8 +53,10 @@ If you are using this role from the ansible-galaxy website, make sure you use "j
 
 ## Role variables
 
-- kafka_hosts - Comma separated list of host:port pairs in the cluster, defaults to 'ansible_fqdn:9092' for a single node.
-- zookeeper_hosts - Comma separated list of host:port pairs.
+- `kafka_hosts` - Comma separated list of host:port pairs in the cluster, defaults to 'ansible_fqdn:9092' for a single node.
+- `zookeeper_hosts` - Comma separated list of host:port pairs.
+- `kafka_broker_id` - Integer uniquely identifying the broker, by default one will be generated for you either by this role or by kafka itself for versions >= 0.9.
+- `kafka_generate_broker_id` - Flag controlling whether to generate a broker id, defaults to `yes`.
 
 ## License
 

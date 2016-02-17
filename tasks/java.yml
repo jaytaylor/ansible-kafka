@@ -1,7 +1,9 @@
 ---
 - name: "Check if Java is installed"
-  shell: which java
+  shell: command -v java
   register: check_java
+  ignore_errors: True
+  changed_when: False
   tags:
     - kafka-install
     - java
@@ -13,4 +15,3 @@
   tags:
     - kafka-install
     - java
-

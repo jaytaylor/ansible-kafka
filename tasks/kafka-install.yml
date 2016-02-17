@@ -13,6 +13,7 @@
   shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
   ignore_errors: yes
   register: verify
+  changed_when: False
   tags:
     - kafka-install
 
@@ -25,6 +26,7 @@
 - name: "Retry kafka binary package archive autenticity verification"
   shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
   when: verify.rc != 0
+  changed_when: False
   tags:
     - kafka-install
 
@@ -43,6 +45,7 @@
 - name: "Detect if this is a systemd based system"
   command: cat /proc/1/comm
   register: init
+  changed_when: False
   tags:
     - kafka-install
 
