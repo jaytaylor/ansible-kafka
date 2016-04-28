@@ -5,10 +5,10 @@ zookeeper_hosts: # <-- must be overridden further up the chain
 kafka_hosts: # <-- must be overridden further up the chain
 # e.g. srvr1:9092,srvr2:9092
 
-kafka_version: "0.8.2.1"
+kafka_version: "0.9.0.1"
 
-kafka_scala_version: "2.10"
-# NB: 2.10 is recommended at https://kafka.apache.org/downloads.html.
+kafka_scala_version: "2.11"
+# NB: 2.11 is recommended at https://kafka.apache.org/downloads.html.
 
 kafka_mirror: http://apache.mirrors.tds.net/kafka
 kafka_url: "{{ kafka_mirror }}/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
