@@ -8,13 +8,13 @@ respawn
 
 console log
 
-limit nofile {{nofiles_limit}} {{nofiles_limit}}
+limit nofile {{ nofiles_limit }} {{ nofiles_limit }}
 
-env USER={{kafka_user}}
-env GROUP={{kafka_group}}
-env LOG_DIR={{kafka_log_dir}}
-env STDOUT={{kafka_log_dir}}/kafka.log
-env STDERR={{kafka_log_dir}}/kafka.err
+env USER={{ kafka_user }}
+env GROUP={{ kafka_group }}
+env LOG_DIR={{ kafka_log_dir }}
+env STDOUT={{ kafka_log_dir }}/kafka.log
+env STDERR={{ kafka_log_dir }}/kafka.err
 env PID=/var/run/kafka.pid
 
 script

@@ -37,6 +37,8 @@ kafka_port_test_timeout_seconds: 30
 
 kafka_generate_broker_id: yes
 
+kafka_log4j_date_pattern: "'.'yyyy-MM-dd" # Rollover at midnight each day.
+
 server:
   # broker_id: <-- this is auto-set by hashing the machine-id during kafka-cfg step.
   # zookeeper_hosts: <-- this is auto-set by the global "zookeeper_hosts" setting.

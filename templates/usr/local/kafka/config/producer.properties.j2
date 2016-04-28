@@ -18,7 +18,7 @@
 
 # list of brokers used for bootstrapping knowledge about the rest of the cluster
 # format: host1:port1,host2:port2 ...
-metadata.broker.list={{kafka_hosts}}
+metadata.broker.list={{ kafka_hosts }}
 
 {% if producer %}
 
@@ -44,45 +44,45 @@ metadata.broker.list={{kafka_hosts}}
 #    majority) receive a write, then you must set the topic-level
 #    min.insync.replicas setting. Please read the Replication section of the
 #    design documentation for a more in-depth discussion.
-request.required.acks={{producer.request_required_acks}}
+request.required.acks={{ producer.request_required_acks }}
 {% endif %}
 
 {% if producer.request_timeout_ms %}
 # The amount of time the broker will wait trying to meet the
 # request.required.acks requirement before sending back an error to the client.
-request.timeout.ms={{producer.request_timeout_ms}}
+request.timeout.ms={{ producer.request_timeout_ms }}
 {% endif %}
 
 {% if producer.type %}
 # specifies whether the messages are sent asynchronously (async) or synchronously (sync)
-producer.type={{producer.type}}
+producer.type={{ producer.type }}
 {% endif %}
 
 {% if producer.serializer_class %}
 # message encoder
-serializer.class={{producer.serializer_class}}
+serializer.class={{ producer.serializer_class }}
 {% endif %}
 
 {% if producer.key_serializer_class %}
 # The serializer class for keys (defaults to the same as for messages if nothing
 # is given).
-key.serializer.class={{producer.key_serializer_class}}
+key.serializer.class={{ producer.key_serializer_class }}
 {% endif %}
 
 {% if producer.partitioner_class %}
 # name of the partitioner class for partitioning events; default partition spreads data randomly
-partitioner.class={{producer.partitioner_class}}
+partitioner.class={{ producer.partitioner_class }}
 {% endif %}
 
 {% if producer.compression_codec %}
 # specify the compression codec for all data generated: none, gzip, snappy, lz4.
 # the old config values work as well: 0, 1, 2, 3 for none, gzip, snappy, lz4, respectively
-compression.codec={{producer.compression_codec}}
+compression.codec={{ producer.compression_codec }}
 {% endif %}
 
 {% if producer.compressed_topics %}
 # allow topic level compression
-compressed.topics={{producer.compressed_topics}}
+compressed.topics={{ producer.compressed_topics }}
 {% endif %}
 
 {% if producer.compressed_topics %}
@@ -91,7 +91,7 @@ compressed.topics={{producer.compressed_topics}}
 # occur. Note that setting a non-zero value here can lead to duplicates in the
 # case of network errors that cause a message to be sent but the acknowledgement
 # to be lost.
-message.send.max.retries={{producer.message_send_max_retries}}
+message.send.max.retries={{ producer.message_send_max_retries }}
 {% endif %}
 
 {% if producer.retry_backoff_ms %}
@@ -99,7 +99,7 @@ message.send.max.retries={{producer.message_send_max_retries}}
 # see if a new leader has been elected. Since leader election takes a bit of
 # time, this property specifies the amount of time that the producer waits
 # before refreshing the metadata.
-retry.backoff.ms={{producer.retry_backoff_ms}}
+retry.backoff.ms={{ producer.retry_backoff_ms }}
 {% endif %}
 
 {% if producer.topic_metadata_refresh_interval_ms %}
@@ -110,23 +110,23 @@ retry.backoff.ms={{producer.retry_backoff_ms}}
 # the metadata will get refreshed after each message sent (not recommended).
 # Important note: the refresh happen only AFTER the message is sent, so if the
 # producer never sends a message the metadata is never refreshed
-topic.metadata.refresh.interval.ms={{producer.topic_metadata_refresh_interval_ms}}
+topic.metadata.refresh.interval.ms={{ producer.topic_metadata_refresh_interval_ms }}
 {% endif %}
 
 {% if producer.send_buffer_bytes %}
 # Socket write buffer size
-send.buffer.bytes={{prodcuer.send_buffer_bytes}}
+send.buffer.bytes={{ prodcuer.send_buffer_bytes }}
 {% endif %}
 
 ############################# Async Producer #############################
 {% if producer.queue_buffering_max_ms %}
 # maximum time, in milliseconds, for buffering data on the producer queue
-queue.buffering.max.ms={{producer.queue_buffering_max_ms}}
+queue.buffering.max.ms={{ producer.queue_buffering_max_ms }}
 {% endif %}
 
 {% if producer.queue_buffering_max_messages %}
 # the maximum size of the blocking queue for buffering on the producer
-queue.buffering.max.messages={{producer.queue_buffering_max_messages}}
+queue.buffering.max.messages={{ producer.queue_buffering_max_messages }}
 {% endif %}
 
 {% if producer.queue_enqueue_timeout_ms %}
@@ -134,12 +134,12 @@ queue.buffering.max.messages={{producer.queue_buffering_max_messages}}
 # 0: events will be enqueued immediately or dropped if the queue is full
 # -ve: enqueue will block indefinitely if the queue is full
 # +ve: enqueue will block up to this many milliseconds if the queue is full
-queue.enqueue.timeout.ms={{producer.queue_enqueue_timeout_ms}}
+queue.enqueue.timeout.ms={{ producer.queue_enqueue_timeout_ms }}
 {% endif %}
 
 {% if producer.batch_num_messages %}
 # the number of messages batched at the producer
-batch.num.messages={{producer.batch_num_messages}}
+batch.num.messages={{ producer.batch_num_messages }}
 {% endif %}
 
 {% endif %}
