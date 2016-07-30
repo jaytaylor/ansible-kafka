@@ -39,6 +39,12 @@ kafka_generate_broker_id: yes
 
 kafka_log4j_date_pattern: "'.'yyyy-MM-dd" # Rollover at midnight each day.
 
+
+kafka_environment: {}
+
+healthcheck_address: "{{ server.host_name | default('127.0.0.1')}}"
+
+
 server:
   # broker_id: <-- this is auto-set by hashing the machine-id during kafka-cfg step.
   # zookeeper_hosts: <-- this is auto-set by the global "zookeeper_hosts" setting.
@@ -52,6 +58,8 @@ server:
   host_name:
   advertised_host_name:
   advertised_port:
+  advertised_listeners:
+  listeners:
   socket_send_buffer_bytes: 102400
   socket_receive_buffer_bytes: 102400
   socket_request_max_bytes: 104857600
@@ -143,4 +151,3 @@ producer:
   queue_buffering_max_messages:
   queue_enqueue_timeout_ms:
   batch_num_messages:
-

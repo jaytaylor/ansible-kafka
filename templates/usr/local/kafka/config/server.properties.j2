@@ -27,6 +27,9 @@ log.dirs={{ server.log_dirs }}
 {% if server.port %}
 # default: 9092
 # The port on which the server accepts client connections.
+#
+# Kafka 0.10.0
+# DEPRECATED: only used when `listeners` is not set. Use `listeners` instead. the port to listen and accept connections on
 port={{ server.port }}
 {% endif %}
 
@@ -58,21 +61,42 @@ background.threads={{ server.background_threads }}
 queued.max.requests={{ server.queued_max_requests }}
 {% endif %}
 
+{% if server.listeners %}
+# default: null
+# Listener List - Comma-separated list of URIs we will listen on and their protocols. Specify hostname as 0.0.0.0 to bind to all interfaces. Leave hostname empty to bind to default interface. Examples of legal listener lists: PLAINTEXT://myhost:9092,TRACE://:9091 PLAINTEXT://0.0.0.0:9092, TRACE://localhost:9093
+listeners={{ server.listeners }}
+{% endif %}
+
+{% if server.advertised_listeners %}
+# default: null
+# Listeners to publish to ZooKeeper for clients to use, if different than the listeners above. In IaaS environments, this may need to be different from the interface to which the broker binds. If this is not set, the value for `listeners` will be used.
+advertised_listeners={{ server.advertised_listeners }}
+{% endif %}
+
 {% if server.host_name %}
 # default: null
 # Hostname of broker. If this is set, it will only bind to this address. If this is not set, it will bind to all interfaces, and publish one to ZK.
+#
+# Kafka 0.10.0
+# DEPRECATED: only used when `listeners` is not set. Use `listeners` instead. hostname of broker. If this is set, it will only bind to this address. If this is not set, it will bind to all interfaces
 host.name={{ server.host_name }}
 {% endif %}
 
 {% if server.advertised_host_name %}
 # default: null
 # If this is set this is the hostname that will be given out to producers, consumers, and other brokers to connect to.
+#
+# Kafka 0.10.0
+# DEPRECATED: only used when `advertised.listeners` or `listeners` are not set. Use `advertised.listeners` instead. Hostname to publish to ZooKeeper for clients to use. In IaaS environments, this may need to be different from the interface to which the broker binds. If this is not set, it will use the value for `host.name` if configured. Otherwise it will use the value returned from java.net.InetAddress.getCanonicalHostName().
 advertised.host.name={{ server.advertised_host_name }}
 {% endif %}
 
 {% if server.advertised_port %}
 # default: null
 # The port to give out to producers, consumers, and other brokers to use in establishing connections. This only needs to be set if this port is different from the port the server should bind to.
+#
+# Kafka 0.10.0
+# DEPRECATED: only used when `advertised.listeners` or `listeners` are not set. Use `advertised.listeners` instead. The port to publish to ZooKeeper for clients to use. In IaaS environments, this may need to be different from the port to which the broker binds. If this is not set, it will publish the same port that the broker binds to.
 advertised.port={{ server.advertised_port }}
 {% endif %}
 

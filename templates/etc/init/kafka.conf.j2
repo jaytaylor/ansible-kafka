@@ -18,12 +18,14 @@ env STDERR={{ kafka_log_dir }}/kafka.err
 env PID=/var/run/kafka.pid
 
 script
+    KAFKA_OPTS=$(tr '\n' ' ' < /etc/default/kafka)
+
     test -d "${LOG_DIR}" || mkdir -p "${LOG_DIR}"
     chown -R "${USER}:${GROUP}" "${LOG_DIR}"
     echo $$ > "${PID}"
     sudo su $USER --shell /bin/sh -c 'echo "start inititated, ulimit -n => $(ulimit -n)"'" 1>>${STDOUT} 2>>${STDERR}"
     # Rather than using setuid/setgid sudo is used because the pre-start task must run as root.
-    exec sudo --set-home --user="${USER}" --group="${GROUP}" /bin/sh -c "KAFKA_HEAP_OPTS='{{ kafka_heap_opts }}' LOG_DIR=${LOG_DIR} /usr/local/kafka/bin/kafka-server-start.sh {{ kafka_conf_dir }}/server.properties 1>>${STDOUT} 2>>${STDERR}"
+    exec sudo --set-home --user="${USER}" --group="${GROUP}" /bin/sh -c "${KAFKA_OPTS} /usr/local/kafka/bin/kafka-server-start.sh {{ kafka_conf_dir }}/server.properties 1>>${STDOUT} 2>>${STDERR}"
 end script
 
 post-stop script
