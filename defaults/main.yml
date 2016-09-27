@@ -1,9 +1,10 @@
 ---
 zookeeper_hosts: # <-- must be overridden further up the chain
-# e.g. srvr1:2181,srvr2:2181
+# e.g. [ 'srvr1', 'srvr2' ]
+zookeeper_port: 2181
 
 kafka_hosts: # <-- must be overridden further up the chain
-# e.g. srvr1:9092,srvr2:9092
+# e.g. [ 'srvr1', 'srvr2' ]
 
 kafka_version: "0.9.0.1"
 

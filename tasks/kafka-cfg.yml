@@ -16,6 +16,12 @@
   set_fact: kafka_reserved_broker_max_id=1000000000
   when: kafka_generate_broker_id | bool and kafka_version | version_compare('0.9.0.0', '>=')
 
+- name: "Generate the kafka hosts connection string"
+  set_fact: zookeeper_connection_string="{{ zookeeper_hosts | join(':' ~ zookeeper_port ~ ',') }}:{{ zookeeper_port }}"
+
+- name: "Generate the zookeeper hosts connection string"
+  set_fact: kafka_connection_string="{{ kafka_hosts | join(':' ~ server.port ~ ',') }}:{{ server.port }}"
+
 - name: "Render and write out kafka configuration files"
   template: src=usr/local/kafka/config/{{ item }}.j2 dest="{{ kafka_conf_dir }}/{{ item }}" mode=0640 owner={{ kafka_user }} group={{ kafka_group }}
   sudo: yes

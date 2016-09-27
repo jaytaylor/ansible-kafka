@@ -18,7 +18,7 @@
 
 # list of brokers used for bootstrapping knowledge about the rest of the cluster
 # format: host1:port1,host2:port2 ...
-metadata.broker.list={{ kafka_hosts }}
+metadata.broker.list={{ kafka_connection_string }}
 
 {% if producer %}
 

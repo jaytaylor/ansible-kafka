@@ -33,19 +33,15 @@ Example:
       roles:
         - {
           role: "ansible-kafka",
-          kafka_hosts: "{{ groups.kafka | join(':9092,') }}:9092",
-          zookeeper_hosts: "{{ zookeeper_hosts }}"
+          kafka_hosts: "{{ groups.kafka | list }}",
+          zookeeper_hosts: "{{ zookeeper_hosts | list }}"
           kafka_version: 0.8.2.1,     # Kafka version override.
           kafka_scala_serverion: 2.10 # Scala version override.
         }
 ```
 
 Where `kafka_hosts` and `zookeeper_hosts` are both defined variables
-(e.g. in group_vars/all), and contain comma-delimited lists of host:port pairs.
-
-Example host:port pair format:
-
-    host1:port,host2:port,...,hostN:port
+(e.g. in group_vars/all), and contain the list of hosts to use.
 
 ## Important Note
 
@@ -67,4 +63,3 @@ BSD
 Jay Taylor
 
 [@jtaylor](https://twitter.com/jtaylor) - [jaytaylor.com](http://jaytaylor.com) - [github](https://github.com/jaytaylor)
-
