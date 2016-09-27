@@ -63,7 +63,7 @@
 
 - name: "Check kafka port test result"
   fail: msg="Kafka port not open on host={{ inventory_hostname }}, port={{ server.port }}"
-  when: healthcheck.elapsed >= kafka_port_test_timeout_seconds
+  when: healthcheck.elapsed >= kafka_port_test_timeout_seconds and kafka_port_test_timeout_seconds > 0
   tags:
     - kafka-cfg
     - kafka-healthcheck
