@@ -516,3 +516,7 @@ offsets.commit.timeout.ms={{ server.offsets_commit_timeout_ms }}
 {% endif %}
 
 {% endif %}
+
+{% for key, value in server.misc.iteritems() -%}
+{{key}}={{value}}
+{% endfor -%}

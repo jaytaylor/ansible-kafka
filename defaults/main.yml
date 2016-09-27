@@ -132,6 +132,7 @@ server:
   offsets_load_buffer_size:
   offsets_commit_required_acks:
   offsets_commit_timeout_ms:
+  misc: {}
 
 producer:
   # metadata_broker_list: <-- this is auto-set by the global "kafka_hosts" setting.
