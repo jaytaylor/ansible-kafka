@@ -16,10 +16,10 @@
   set_fact: kafka_reserved_broker_max_id=1000000000
   when: kafka_generate_broker_id | bool and kafka_version | version_compare('0.9.0.0', '>=')
 
-- name: "Generate the kafka hosts connection string"
+- name: "Generate the zookeeper hosts connection string"
   set_fact: zookeeper_connection_string="{{ zookeeper_hosts | join(':' ~ zookeeper_port ~ ',') }}:{{ zookeeper_port }}"
 
-- name: "Generate the zookeeper hosts connection string"
+- name: "Generate the kafka hosts connection string"
   set_fact: kafka_connection_string="{{ kafka_hosts | join(':' ~ server.port ~ ',') }}:{{ server.port }}"
 
 - name: "Render and write out kafka configuration files"
