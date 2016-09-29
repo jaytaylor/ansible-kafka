@@ -29,6 +29,12 @@ kafka_user: kafka
 
 kafka_max_logfile_size: 50MB
 kafka_max_logbackup_idx: 7
+kafka_logger_root: INFO, stdout
+kafka_logger_kafka: INFO, kafkaAppender
+kafka_logger_kafka_controller: TRACE, controllerAppender
+kafka_logger_kafka_request: WARN, requestAppender
+kafka_logger_kafka_cleaner: INFO, cleanerAppender
+kafka_logger_state: TRACE, stateChangeAppender
 
 kafka_heap_opts: "-Xmx1G -Xms1G"
 
