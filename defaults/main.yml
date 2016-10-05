@@ -1,7 +1,7 @@
 ---
-zookeeper_hosts: # <-- must be overridden further up the chain
+kafka_zookeeper_hosts: # <-- must be overridden further up the chain
 # e.g. [ 'srvr1', 'srvr2' ]
-zookeeper_port: 2181
+kafka_zookeeper_port: 2181
 
 kafka_hosts: # <-- must be overridden further up the chain
 # e.g. [ 'srvr1', 'srvr2' ]
@@ -54,7 +54,7 @@ healthcheck_address: "{{ server.host_name | default('127.0.0.1')}}"
 
 server:
   # broker_id: <-- this is auto-set by hashing the machine-id during kafka-cfg step.
-  # zookeeper_hosts: <-- this is auto-set by the global "zookeeper_hosts" setting.
+  # zookeeper_hosts: <-- this is auto-set by the global "kafka_zookeeper_hosts" setting.
   log_dirs: "{{ kafka_data_dir }}"
   port: 9092
   message_max_bytes:

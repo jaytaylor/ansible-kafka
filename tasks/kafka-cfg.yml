@@ -17,7 +17,7 @@
   when: kafka_generate_broker_id | bool and kafka_version | version_compare('0.9.0.0', '>=')
 
 - name: "Generate the zookeeper hosts connection string"
-  set_fact: zookeeper_connection_string="{{ zookeeper_hosts | join(':' ~ zookeeper_port ~ ',') }}:{{ zookeeper_port }}"
+  set_fact: zookeeper_connection_string="{{ kafka_zookeeper_hosts | join(':' ~ zookeeper_port ~ ',') }}:{{ zookeeper_port }}"
 
 - name: "Generate the kafka hosts connection string"
   set_fact: kafka_connection_string="{{ kafka_hosts | join(':' ~ server.port ~ ',') }}:{{ server.port }}"
