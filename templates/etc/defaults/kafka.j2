@@ -1,5 +1,5 @@
 KAFKA_HEAP_OPTS='{{ kafka_heap_opts }}'
-LOG_DIR=${LOG_DIR}
+LOG_DIR='{{ kafka_log_dir }}'
 
 {% for key, value in kafka_environment.iteritems() %}
 {{key}}={{value}}
