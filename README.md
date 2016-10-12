@@ -33,19 +33,15 @@ Example:
       roles:
         - {
           role: "ansible-kafka",
-          kafka_hosts: "{{ groups.kafka | join(':9092,') }}:9092",
-          zookeeper_hosts: "{{ zookeeper_hosts }}"
+          kafka_hosts: "{{ groups.kafka | list }}",
+          kafka_zookeeper_hosts: "{{ zookeeper_hosts | list }}"
           kafka_version: 0.8.2.1,     # Kafka version override.
           kafka_scala_serverion: 2.10 # Scala version override.
         }
 ```
 
 Where `kafka_hosts` and `zookeeper_hosts` are both defined variables
-(e.g. in group_vars/all), and contain comma-delimited lists of host:port pairs.
-
-Example host:port pair format:
-
-    host1:port,host2:port,...,hostN:port
+(e.g. in group_vars/all), and contain the list of hosts to use.
 
 ## Important Note
 
@@ -53,8 +49,8 @@ If you are using this role from the ansible-galaxy website, make sure you use "j
 
 ## Role variables
 
-- `kafka_hosts` - Comma separated list of host:port pairs in the cluster, defaults to 'ansible_fqdn:9092' for a single node.
-- `zookeeper_hosts` - Comma separated list of host:port pairs.
+- `kafka_hosts` - list of hosts in the cluster.
+- `kafka_zookeeper_hosts` - list of zookeeper hosts for the cluster.
 - `kafka_broker_id` - Integer uniquely identifying the broker, by default one will be generated for you either by this role or by kafka itself for versions >= 0.9.
 - `kafka_generate_broker_id` - Flag controlling whether to generate a broker id, defaults to `yes`.
 
@@ -67,4 +63,3 @@ BSD
 Jay Taylor
 
 [@jtaylor](https://twitter.com/jtaylor) - [jaytaylor.com](http://jaytaylor.com) - [github](https://github.com/jaytaylor)
-

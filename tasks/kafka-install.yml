@@ -104,10 +104,3 @@
   sudo: yes
   tags:
     - kafka-install
-
-- name: "Enable kafka system service"
-  service: name=kafka state=started enabled=yes
-  sudo: yes
-  tags:
-    - kafka-install
-
