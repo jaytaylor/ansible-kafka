@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/jaytaylor/ansible-kafka.svg?branch=master)](https://travis-ci.org/jaytaylor/ansible-kafka)
 [![Galaxy](https://img.shields.io/badge/galaxy-jaytaylor.kafka-blue.svg)](https://galaxy.ansible.com/list#/roles/4083)
 
-Note: Build is currently failing due to issues with Kafka 2.0.  Rest assured that it works fine, but I haven't had time to chase this one down.  PR's gladly accepted :)
-
 An ansible role to install and configure [kafka](https://kafka.apache.org/) distributed pub/sub messaging queue clusters.
+
+Note: Build is currently failing due to issues with Kafka 2.0.  Rest assured that it works fine, but I haven't had time to chase this one down.  PR's gladly accepted :)
 
 ## How to get it
 
