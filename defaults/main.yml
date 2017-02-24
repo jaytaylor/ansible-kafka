@@ -24,8 +24,8 @@ kafka_conf_dir: /etc/kafka
 kafka_data_dir: /var/kafka
 kafka_log_dir: /var/log/kafka
 
-kafka_group: kafka
 kafka_user: kafka
+kafka_group: root
 
 kafka_max_logfile_size: 50MB
 kafka_max_logbackup_idx: 7
