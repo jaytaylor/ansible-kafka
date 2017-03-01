@@ -4,8 +4,8 @@ After=zookeeper.service
 
 [Service]
 Type=simple
-User=kafka
-Group=kafka
+User={{ kafka_user }}
+Group={{ kafka_group }}
 LimitNOFILE={{ nofiles_limit }}
 Restart=on-failure
 EnvironmentFile=/etc/default/kafka
