@@ -16,7 +16,7 @@ kafka_url: "{{ kafka_mirror }}/{{ kafka_version }}/kafka_{{ kafka_scala_version 
 kafka_bin_tmp: "/tmp/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tar.gz"
 
 kafka_sig_url: "https://dist.apache.org/repos/dist/release/kafka/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz.asc"
-kafka_keys_url: "https://dist.apache.org/repos/dist/release/kafka/KEYS"
+kafka_keys_url: "http://kafka.apache.org/KEYS"
 kafka_keys_tmp: "/tmp/kafka_KEYS"
 kafka_sig_tmp: "/tmp/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tar.gz.asc"
 
