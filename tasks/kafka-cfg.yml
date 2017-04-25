@@ -4,9 +4,6 @@
   shell: ( test -r /etc/fstab && ls -l /dev/disk/by-uuid/ | grep $(mount | grep ' / ' | cut -d' ' -f1 | cut -d'/' -f3) | grep --ignore-case --only-matching --extended-regexp --max 1 '[0-9a-f]{3,}[0-9a-f-]+' | tr -d '-' || echo '0' ; ifconfig | grep --ignore-case --only-matching --extended-regexp '([0-9a-f]{2}:){5}[0-9a-f]{2}' | tr -d ':' | tr -d '\n') | python -c 'import sys; x, y = sys.stdin.read().split(chr(10))[0:2]; x = int(x, 16); y = int(y, 16); sys.stdout.write((str(x + y)[-9:])); sys.exit(1 if x == 0 and y == 0 else 0)'
   register: machineidinteger
   changed_when: False
-  when: kafka_generate_broker_id | bool
-  tags:
-    - kafka-cfg
 
 - name: "Use generated unique machine id integer as broker id"
   set_fact: kafka_broker_id={{ machineidinteger.stdout_lines[0] }}
@@ -32,16 +29,12 @@
     - log4j.properties
   notify:
     - restart kafka
-  tags:
-    - kafka-cfg
 
 - name: "Render and write out kafka user env file"
   template: src=etc/defaults/kafka.j2 dest="/etc/default/kafka" mode=0644 owner=root group=root
   sudo: yes
   notify:
     - restart kafka
-  tags:
-    - kafka-cfg
 
 - name: "Enable kafka system service"
   service: name=kafka state=started enabled=yes
@@ -53,23 +46,18 @@
   shell: "( test ! -e /usr/local/kafka/logs || rm -rf /usr/local/kafka/logs ) && ln -s {{ kafka_log_dir }} /usr/local/kafka/logs && touch {{ kafka_log_dir }}/state-change.log {{ kafka_log_dir }}/kafkaServer.out && chown {{ kafka_user }}:{{ kafka_group }} {{ kafka_log_dir }}/state-change.log {{ kafka_log_dir }}/kafkaServer.out"
   changed_when: False
   sudo: yes
-  tags: kafka-cfg
 
 - meta: flush_handlers
-  tags:
-    - kafka-cfg
 
 - name: "Wait for kafka to come up and open it's server port"
   wait_for: port={{ server.port }} host={{ healthcheck_address }} connect_timeout={{ kafka_port_test_timeout_seconds }} timeout={{ kafka_port_test_timeout_seconds }}
   ignore_errors: yes
   register: healthcheck
   tags:
-    - kafka-cfg
     - kafka-healthcheck
 
 - name: "Check kafka port test result"
   fail: msg="Kafka port not open on host={{ inventory_hostname }}, port={{ server.port }}"
   when: healthcheck.elapsed >= kafka_port_test_timeout_seconds and kafka_port_test_timeout_seconds > 0
   tags:
-    - kafka-cfg
     - kafka-healthcheck
