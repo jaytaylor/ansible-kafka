@@ -11,6 +11,9 @@ kafka_version: "0.9.0.1"
 kafka_scala_version: "2.11"
 # NB: 2.11 is recommended at https://kafka.apache.org/downloads.html.
 
+kafka_java_enabled: true
+# set false if the role should not handle the java dependency
+
 kafka_mirror: http://apache.mirrors.tds.net/kafka
 kafka_url: "{{ kafka_mirror }}/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
 kafka_bin_tmp: "/tmp/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tar.gz"

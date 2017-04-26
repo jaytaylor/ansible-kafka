@@ -1,6 +1,7 @@
 ---
 - include: check-env.yml
 - include: java.yml
+  when: kafka_java_enabled
 - include: system.yml
 - include: limits.yml
 - include: kafka-install.yml
