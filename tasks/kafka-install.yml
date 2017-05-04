@@ -1,40 +1,26 @@
 ---
 - name: "Download kafka binary package archive"
   get_url: url={{ kafka_url }} dest={{ kafka_bin_tmp }} timeout=600
-  tags:
-    - kafka-install
 
 - name: "Download the corresponding cryptographic signature file"
   get_url: url={{ kafka_sig_url }} dest={{ kafka_sig_tmp }} timeout=600
-  tags:
-    - kafka-install
 
 - name: "Download the kafka PGP keys"
   get_url: url={{ kafka_keys_url }} dest={{ kafka_keys_tmp }} timeout=600
-  tags:
-    - kafka-install
 
 - name: "Import kafka PGP keys"
   shell: gpg --import {{ kafka_keys_tmp }}
-  tags:
-    - kafka-install
 
 - name: "Verify kafka binary package archive authenticity"
   shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
-  tags:
-    - kafka-install
 
 - name: "Extract downloaded kafka archive"
   unarchive: copy=no creates=/usr/local/kafka_{{ kafka_scala_version }}-{{ kafka_version }} dest=/usr/local src={{ kafka_bin_tmp }}
   sudo: yes
-  tags:
-    - kafka-install
 
 - name: "Link /usr/local/kafka to the right version"
   file: path=/usr/local/kafka state=link src=/usr/local/kafka_{{ kafka_scala_version }}-{{ kafka_version }}
   sudo: yes
-  tags:
-    - kafka-install
 
 - name: "Detect if this is a systemd based system"
   command: cat /proc/1/comm
@@ -46,13 +32,9 @@
 
 - set_fact: use_systemd=True
   when: init.stdout == 'systemd'
-  tags:
-    - kafka-install
 
 - set_fact: use_systemd=False
   when: init.stdout != 'systemd'
-  tags:
-    - kafka-install
 
 - name: "Create upstart config"
   template: dest=/etc/init/kafka.conf src=etc/init/kafka.conf.j2 mode=0644 owner=root group=root
@@ -60,8 +42,6 @@
   when: not use_systemd
   notify:
     - restart kafka
-  tags:
-    - kafka-install
 
 - name: "Create systemd config"
   template: dest=/etc/systemd/system/kafka.service src=etc/systemd/system/kafka.service.j2 mode=0644 owner=root group=root
@@ -69,15 +49,11 @@
   when: use_systemd
   notify:
     - restart kafka
-  tags:
-    - kafka-install
 
 - name: "Reload systemctl daemon"
   command: systemctl daemon-reload
   sudo: yes
   when: use_systemd
-  tags:
-    - kafka-install
 
 - name: "Create kafka directories"
   file: path={{ item }} state=directory mode=0755 owner={{ kafka_user }} group={{ kafka_group }}
@@ -85,17 +61,11 @@
   with_items:
     - "{{ kafka_data_dir }}"
     - "{{ kafka_log_dir }}"
-  tags:
-    - kafka-install
 
 - name: "Remove lost+found in the datadir"
   file: path="{{ kafka_data_dir }}/lost+found" state=absent
   sudo: yes
-  tags:
-    - kafka-install
 
 - name: "Symlink kafka_conf_dir to /usr/local/kafka/config"
   file: src=/usr/local/kafka/config path={{ kafka_conf_dir }} state=link
   sudo: yes
-  tags:
-    - kafka-install
