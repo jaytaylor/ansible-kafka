@@ -7,9 +7,11 @@
 
 - name: "Download the kafka PGP keys"
   get_url: url={{ kafka_keys_url }} dest={{ kafka_keys_tmp }} timeout=600
+  changed_when: False
 
 - name: "Import kafka PGP keys"
   shell: gpg --import {{ kafka_keys_tmp }}
+  changed_when: False
 
 - name: "Verify kafka binary package archive authenticity"
   shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
