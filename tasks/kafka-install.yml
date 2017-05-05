@@ -15,6 +15,7 @@
 
 - name: "Verify kafka binary package archive authenticity"
   shell: gpg --verify {{ kafka_sig_tmp }} {{ kafka_bin_tmp }}
+  changed_when: False
 
 - name: "Extract downloaded kafka archive"
   unarchive: copy=no creates=/usr/local/kafka_{{ kafka_scala_version }}-{{ kafka_version }} dest=/usr/local src={{ kafka_bin_tmp }}
