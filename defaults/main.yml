@@ -43,7 +43,7 @@ kafka_heap_opts: "-Xmx1G -Xms1G"
 
 nofiles_limit: 50000
 
-kafka_port_test_timeout_seconds: 30
+kafka_port_test_timeout_seconds: 120
 
 kafka_generate_broker_id: yes
 
@@ -65,7 +65,7 @@ server:
   num_io_threads: 8
   background_threads:
   queued_max_requests:
-  host_name:
+  host_name: localhost
   advertised_host_name:
   advertised_port:
   advertised_listeners:
