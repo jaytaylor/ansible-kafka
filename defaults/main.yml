@@ -20,7 +20,6 @@ kafka_java_enabled: true
 #below is the location of archived kafka versions (which we're still using)
 #while we're still using archived versions of kafka, use this URL.
 kafka_mirror: https://archive.apache.org/dist/kafka
-
 kafka_url: "{{ kafka_mirror }}/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
 kafka_bin_tmp: "/tmp/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tar.gz"
 
