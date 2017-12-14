@@ -8,6 +8,6 @@
   sudo: yes
 
 - name: "Add kafka utilities to /etc/profile* so they'll be available in $PATH"
-  lineinfile: dest=/etc/profile.d/Z99-kafka.sh regexp="^export PATH=.*$" line='export PATH="${PATH}:/usr/local/lib/kafka/bin"' state=present create=yes
+  lineinfile: dest=/etc/profile.d/Z99-kafka.sh regexp="^export PATH=.*$" line='export PATH="${PATH}:/usr/local/kafka/bin"' state=present create=yes
   sudo: yes
 
