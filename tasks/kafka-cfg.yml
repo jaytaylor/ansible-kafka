@@ -4,6 +4,7 @@
   shell: ( test -r /etc/fstab && find /dev/disk/by-uuid/ -type l -printf "%f\n" | sort | head -1 | grep --ignore-case --only-matching --extended-regexp --max 1 '[0-9a-f]{3,}[0-9a-f-]+' | tr -d '-' || echo '0' ; ifconfig | grep --ignore-case --only-matching --extended-regexp '([0-9a-f]{2}:){5}[0-9a-f]{2}' | tr -d ':' | tr -d '\n') | python -c 'import sys; x, y = sys.stdin.read().split(chr(10))[0:2]; x = int(x, 16); y = int(y, 16); sys.stdout.write((str(x + y)[-9:])); sys.exit(1 if x == 0 and y == 0 else 0)'
   register: machineidinteger
   changed_when: False
+  when: kafka_generate_broker_id | bool
 
 - name: "Use generated unique machine id integer as broker id"
   set_fact: kafka_broker_id={{ machineidinteger.stdout_lines[0] }}
