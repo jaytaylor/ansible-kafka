@@ -6,7 +6,7 @@ kafka_zookeeper_port: 2181
 kafka_hosts: # <-- must be overridden further up the chain
 # e.g. [ 'srvr1', 'srvr2' ]
 
-kafka_version: "0.9.0.1"
+kafka_version: "0.11.0.2"
 
 kafka_scala_version: "2.11"
 # NB: 2.11 is recommended at https://kafka.apache.org/downloads.html.
