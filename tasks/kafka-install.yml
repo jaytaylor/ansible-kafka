@@ -25,35 +25,24 @@
   file: path=/usr/local/kafka state=link src=/usr/local/kafka_{{ kafka_scala_version }}-{{ kafka_version }}
   sudo: yes
 
-- name: "Detect if this is a systemd based system"
-  command: cat /proc/1/comm
-  register: init
-  changed_when: False
-
-- set_fact: use_systemd=True
-  when: init.stdout == 'systemd'
-
-- set_fact: use_systemd=False
-  when: init.stdout != 'systemd'
-
 - name: "Create upstart config"
   template: dest=/etc/init/kafka.conf src=etc/init/kafka.conf.j2 mode=0644 owner=root group=root
   sudo: yes
-  when: not use_systemd
+  when: ansible_service_mgr != 'systemd'
   notify:
     - restart kafka
 
 - name: "Create systemd config"
   template: dest=/etc/systemd/system/kafka.service src=etc/systemd/system/kafka.service.j2 mode=0644 owner=root group=root
   sudo: yes
-  when: use_systemd
+  when: ansible_service_mgr == 'systemd'
   notify:
     - restart kafka
 
 - name: "Reload systemctl daemon"
   command: systemctl daemon-reload
   sudo: yes
-  when: use_systemd
+  when: ansible_service_mgr == 'systemd'
 
 - name: "Create kafka directories"
   file: path={{ item }} state=directory mode=0755 owner={{ kafka_user }} group={{ kafka_group }}
