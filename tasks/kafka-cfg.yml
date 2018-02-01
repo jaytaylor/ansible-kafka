@@ -54,6 +54,7 @@
   wait_for: port={{ server.port }} host={{ healthcheck_address }} connect_timeout={{ kafka_port_test_timeout_seconds }} timeout={{ kafka_port_test_timeout_seconds }}
   ignore_errors: yes
   register: healthcheck
+  check_mode: no
   tags:
     - kafka-healthcheck
 

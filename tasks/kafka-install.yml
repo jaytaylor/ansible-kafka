@@ -29,6 +29,9 @@
   command: cat /proc/1/comm
   register: init
   changed_when: False
+  check_mode: no
+  tags:
+    - kafka-install
 
 - set_fact: use_systemd=True
   when: init.stdout == 'systemd'
