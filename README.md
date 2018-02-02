@@ -36,7 +36,7 @@ Example:
           role: "ansible-kafka",
           kafka_hosts: "{{ groups.kafka | list }}",
           kafka_zookeeper_hosts: "{{ zookeeper_hosts | list }}"
-          kafka_version: 0.8.2.1,     # Kafka version override.
+          kafka_version: 0.11.0.2,     # Kafka version override.
           kafka_scala_serverion: 2.10 # Scala version override.
         }
 ```
