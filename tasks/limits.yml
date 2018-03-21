@@ -1,10 +1,10 @@
 ---
 - name: "Increase soft nofile limit for kafka system user"
-  lineinfile: dest=/etc/security/limits.conf regexp="^[ \t]*{{ kafka_user }} soft nofile .+[ \t]*$" line="kafka soft nofile {{ nofiles_limit }}" state=present create=yes
+  lineinfile: dest=/etc/security/limits.conf regexp="^[ \t]*{{ kafka_user }} soft nofile .+[ \t]*$" line="kafka soft nofile {{ kafka_nofiles_limit }}" state=present create=yes
   sudo: yes
 
 - name: "Increase hard nofile limit for kafka system user"
-  lineinfile: dest=/etc/security/limits.conf regexp="^[ \t]*{{ kafka_user }} hard nofile .+[ \t]*$" line="kafka hard nofile {{ nofiles_limit }}" state=present create=yes
+  lineinfile: dest=/etc/security/limits.conf regexp="^[ \t]*{{ kafka_user }} hard nofile .+[ \t]*$" line="kafka hard nofile {{ kafka_nofiles_limit }}" state=present create=yes
   sudo: yes
 
 - name: "Add 'session required pam_limits.so' to /etc/pam.d/common-session"
