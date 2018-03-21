@@ -54,6 +54,26 @@ If you are using this role from the ansible-galaxy website, make sure you use "j
 - `kafka_zookeeper_hosts` - list of zookeeper hosts for the cluster.
 - `kafka_broker_id` - Integer uniquely identifying the broker, by default one will be generated for you either by this role or by kafka itself for versions >= 0.9.
 - `kafka_generate_broker_id` - Flag controlling whether to generate a broker id, defaults to `yes`.
+- `kafka_server_defaults` - Default Kafka server settings. This variable shoulnd't usually be changed.
+- `kafka_producer_defaults` - Default Kafka producer settings. This variable shouldn't usually be changed.
+- `kafka_server` - Allows to overwrite particular default server settings (from `kafka_server_defaults` variable). Values in this hash are combined with `kafka_server_defaults` variable.
+- `kafka_producer` - Allows to overwrite particular default producer settings (from `kafka_producer_defaults` variable). Values in this hash are combined with `kafka_server_defaults` variable.
+- `kafka_healthcheck_address` - If not defined, this will dynamicaly set to `kafka_server_defaults.host_name` or `kafka_server.host_name` if defined. Defaults to '127.0.0.1'
+- `kafka_java_version` - Java version to install. Defaults to "openjdk-7-jre-headless"
+
+## Version notes
+
+Version 2.0.0 does not support Ansible versions lower than 2.2.
+
+Before version 2.0.0, `server` and `producer` Ansible variables were used to configure Kafka Server and Kafka Producer respecively, but 2.0.0 introduced better variable scoping and better variable overwritting:
+
+- `server` variable became `kafka_server`, so it is inside Kafka role "scope". It is a hash that is combined with `kafka_server_defaults` hash, overwriting the values defined in the former. This makes easier to overwrite just some particular setting, instead of rewritting the whole `server` variable hash jus tto change one setting.
+- `producer` variable became `kafka_producer`, and it behaves now the same way as `kafka_server` variable. Also `kafka_producer_defaults` hash has the default values for producer.
+
+Also:
+
+- `healthcheck_address` became `kafka_healthcheck_address`, which improves its scope.
+- `nofiles_limit` became `kafka_nofiles_limit`
 
 ## License
 

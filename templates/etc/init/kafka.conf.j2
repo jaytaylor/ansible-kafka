@@ -6,7 +6,7 @@ stop on runlevel [!12345]
 
 respawn
 
-limit nofile {{ nofiles_limit }} {{ nofiles_limit }}
+limit nofile {{ kafka_nofiles_limit }} {{ kafka_nofiles_limit }}
 
 env USER={{ kafka_user }}
 env GROUP={{ kafka_group }}

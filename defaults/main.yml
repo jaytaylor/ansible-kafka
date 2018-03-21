@@ -13,6 +13,7 @@ kafka_scala_version: "2.11"
 
 kafka_java_enabled: true
 # set false if the role should not handle the java dependency
+kafka_java_version: "openjdk-7-jre-headless"
 
 kafka_mirror: http://apache.mirrors.tds.net/kafka
 kafka_url: "{{ kafka_mirror }}/{{ kafka_version }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
@@ -41,7 +42,7 @@ kafka_logger_state: TRACE, stateChangeAppender
 
 kafka_heap_opts: "-Xmx1G -Xms1G"
 
-nofiles_limit: 50000
+kafka_nofiles_limit: 50000
 
 kafka_port_test_timeout_seconds: 120
 
@@ -52,10 +53,11 @@ kafka_log4j_date_pattern: "'.'yyyy-MM-dd" # Rollover at midnight each day.
 
 kafka_environment: {}
 
-healthcheck_address: "{{ server.host_name | default('127.0.0.1')}}"
+kafka_healthcheck_address: ""
 
+kafka_server: {}
 
-server:
+kafka_server_defaults:
   # broker_id: <-- this is auto-set by hashing the machine-id during kafka-cfg step.
   # zookeeper_hosts: <-- this is auto-set by the global "kafka_zookeeper_hosts" setting.
   log_dirs: "{{ kafka_data_dir }}"
@@ -143,7 +145,9 @@ server:
   offsets_commit_timeout_ms:
   misc: {}
 
-producer:
+kafka_producer: {}
+
+kafka_producer_defaults:
   # metadata_broker_list: <-- this is auto-set by the global "kafka_hosts" setting.
   request_required_acks: 1
   request_timeout_ms:
