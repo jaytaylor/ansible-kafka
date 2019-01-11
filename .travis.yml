@@ -4,10 +4,11 @@ sudo: required
 dist: trusty
 
 language: python
-python: 2.7
+python:
+  - 2.7
+  - 3.6
 
 env:
-  matrix:
   - ANSIBLE_VERSION=2.2.3.0 ANSIBLE_EXTRA_VARS="kafka_version=1.0.2"
   - ANSIBLE_VERSION=2.2.3.0 ANSIBLE_EXTRA_VARS="kafka_version=1.1.1"
   - ANSIBLE_VERSION=2.4.2.0 ANSIBLE_EXTRA_VARS="kafka_version=1.0.2"
