@@ -517,6 +517,6 @@ offsets.commit.timeout.ms={{ kafka_server.offsets_commit_timeout_ms }}
 
 {% endif %}
 
-{% for key, value in kafka_server.misc.iteritems() -%}
+{% for key, value in kafka_server.misc.items() -%}
 {{key}}={{value}}
 {% endfor -%}
