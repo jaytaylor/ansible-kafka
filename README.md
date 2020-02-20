@@ -5,6 +5,9 @@
 
 An ansible role to install and configure [kafka](https://kafka.apache.org/) distributed pub/sub messaging queue clusters.
 
+## Requirements
+
+* Python 3.6 or newer
 
 ## How to get it
 
