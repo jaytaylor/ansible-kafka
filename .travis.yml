@@ -1,24 +1,23 @@
----
-
 sudo: required
-dist: trusty
+dist: bionic
 
 language: python
 python:
-  - 2.7
-  - 3.6
+- "3.6.10"
+- "3.7.6"
+- "3.8.1"
 
 env:
-  - ANSIBLE_VERSION=2.2.3.0 ANSIBLE_EXTRA_VARS="kafka_version=1.0.2"
-  - ANSIBLE_VERSION=2.2.3.0 ANSIBLE_EXTRA_VARS="kafka_version=1.1.1"
-  - ANSIBLE_VERSION=2.4.2.0 ANSIBLE_EXTRA_VARS="kafka_version=1.0.2"
-  - ANSIBLE_VERSION=2.4.2.0 ANSIBLE_EXTRA_VARS="kafka_version=1.1.1"
+- ANSIBLE_VERSION=2.9.5 ANSIBLE_EXTRA_VARS="kafka_version=1.0.2"
+#- ANSIBLE_VERSION=2.2.3.0 ANSIBLE_EXTRA_VARS="kafka_version=1.1.1"
+#- ANSIBLE_VERSION=2.4.2.0 ANSIBLE_EXTRA_VARS="kafka_version=1.0.2"
+#- ANSIBLE_VERSION=2.4.2.0 ANSIBLE_EXTRA_VARS="kafka_version=1.1.1"
 
 before_install:
 - sudo apt-get update -qq
 
 install:
-- pip install ansible==$ANSIBLE_VERSION
+- pip3 install ansible==$ANSIBLE_VERSION
 
 script:
 - cd test
