@@ -1,7 +1,7 @@
 # Ansible Kafka
 
 [![Build Status](https://travis-ci.org/jaytaylor/ansible-kafka.svg?branch=master)](https://travis-ci.org/jaytaylor/ansible-kafka)
-[![Galaxy](https://img.shields.io/badge/galaxy-jaytaylor.kafka-blue.svg)](https://galaxy.ansible.com/list#/roles/4083)
+[![Galaxy](https://img.shields.io/badge/galaxy-jaytaylor.kafka-blue.svg)](https://galaxy.ansible.com/jaytaylor/kafka)
 
 An ansible role to install and configure [kafka](https://kafka.apache.org/) distributed pub/sub messaging queue clusters.
 
